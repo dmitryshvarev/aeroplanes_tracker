@@ -30,6 +30,9 @@ class JSONStorage(AbstractStorage):
         self._data: List[Dict[str, Any]] = []
         self._load_data()
 
+    def __str__(self):
+        return self._filename
+
     def _load_data(self) -> None:
         """Загружает данные из JSON-файла в кэш."""
         if not os.path.exists(self._filename):
