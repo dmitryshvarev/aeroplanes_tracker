@@ -66,7 +66,7 @@ class AbstractStorage(ABC):
         pass
 
     @abstractmethod
-    def delete_aircraft(self, criteria: Dict[str, Any]) -> int:
+    def delete_aeroplanes(self, criteria: Dict[str, Any]) -> int:
         """
         Удаляет информацию о самолетах из хранилища по критериям.
 
