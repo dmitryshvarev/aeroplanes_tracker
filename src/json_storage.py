@@ -19,7 +19,7 @@ class JSONStorage(AbstractStorage):
 
     __slots__ = ("_filename", "_data")
 
-    def __init__(self, filename: str = "../data/aeroplanes_data.json") -> None:
+    def __init__(self, filename: str = "data/aeroplanes_data.json") -> None:
         """
         Инициализация хранилища.
 
