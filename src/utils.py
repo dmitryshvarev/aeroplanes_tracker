@@ -23,7 +23,9 @@ def filter_aeroplanes_by_country(aeroplanes_list: List[Aeroplane], countries: Li
     return [a for a in aeroplanes_list if a.origin_country.lower() in countries_lower]
 
 
-def filter_aeroplanes_by_altitude_range(aeroplanes_list: List[Aeroplane], altitude_range: Optional[str]) -> List[Aeroplane]:
+def filter_aeroplanes_by_altitude_range(
+    aeroplanes_list: List[Aeroplane], altitude_range: Optional[str]
+) -> List[Aeroplane]:
     """
     Фильтрует самолеты по диапазону высот.
 

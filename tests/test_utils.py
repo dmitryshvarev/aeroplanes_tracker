@@ -2,14 +2,8 @@
 
 import pytest
 
-from src.utils import (
-    filter_aeroplanes_by_country,
-    filter_aeroplanes_by_altitude_range,
-    sort_aeroplanes_by_altitude,
-    get_top_n_aeroplanes,
-    format_aeroplanes_list,
-    parse_altitude_range
-)
+from src.utils import (filter_aeroplanes_by_altitude_range, filter_aeroplanes_by_country, format_aeroplanes_list,
+                       get_top_n_aeroplanes, parse_altitude_range, sort_aeroplanes_by_altitude)
 
 
 class TestUtils:
@@ -17,9 +11,9 @@ class TestUtils:
 
     def test_filter_aeroplanes_by_country(self, sample_aeroplanes_objects):
         """Тест фильтрации по стране."""
-        filtered = filter_aeroplanes_by_country(sample_aeroplanes_objects, ['Russia'])
+        filtered = filter_aeroplanes_by_country(sample_aeroplanes_objects, ["Russia"])
         assert len(filtered) == 1
-        assert filtered[0].origin_country == 'Russia'
+        assert filtered[0].origin_country == "Russia"
 
         # Пустой список стран
         filtered = filter_aeroplanes_by_country(sample_aeroplanes_objects, [])
@@ -27,25 +21,16 @@ class TestUtils:
 
     def test_filter_aeroplanes_by_country_multiple(self, sample_aeroplanes_objects):
         """Тест фильтрации по нескольким странам."""
-        filtered = filter_aeroplanes_by_country(
-            sample_aeroplanes_objects,
-            ['Russia', 'Germany']
-        )
+        filtered = filter_aeroplanes_by_country(sample_aeroplanes_objects, ["Russia", "Germany"])
         assert len(filtered) == 2
 
     def test_filter_aeroplanes_by_altitude_range(self, sample_aeroplanes_objects):
         """Тест фильтрации по диапазону высот."""
-        filtered = filter_aeroplanes_by_altitude_range(
-            sample_aeroplanes_objects,
-            "9000 - 11000"
-        )
+        filtered = filter_aeroplanes_by_altitude_range(sample_aeroplanes_objects, "9000 - 11000")
         assert len(filtered) == 3  # Самолеты с высотой в диапазоне
 
         # Неверный формат
-        filtered = filter_aeroplanes_by_altitude_range(
-            sample_aeroplanes_objects,
-            "invalid"
-        )
+        filtered = filter_aeroplanes_by_altitude_range(sample_aeroplanes_objects, "invalid")
         assert len(filtered) == 4
 
     def test_filter_aeroplanes_by_altitude_range_none(self, sample_aeroplanes_objects):
@@ -85,13 +70,16 @@ class TestUtils:
         assert "AFL101" in formatted
         assert "BAW202" in formatted
 
-    @pytest.mark.parametrize("input_str,expected", [
-        ("5000 - 10000", (5000.0, 10000.0)),
-        ("5000-10000", (5000.0, 10000.0)),
-        ("5000,5 - 10000,5", (5000.5, 10000.5)),
-        ("invalid", None),
-        ("", None),
-    ])
+    @pytest.mark.parametrize(
+        "input_str,expected",
+        [
+            ("5000 - 10000", (5000.0, 10000.0)),
+            ("5000-10000", (5000.0, 10000.0)),
+            ("5000,5 - 10000,5", (5000.5, 10000.5)),
+            ("invalid", None),
+            ("", None),
+        ],
+    )
     def test_parse_altitude_range(self, input_str, expected):
         """Тест парсинга диапазона высот."""
         result = parse_altitude_range(input_str)

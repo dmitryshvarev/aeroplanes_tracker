@@ -1,11 +1,9 @@
 """Тесты для классов хранилищ."""
 
 import json
-import os
-import tempfile
 
-from src.json_storage import JSONStorage
 from src.csv_storage import CSVStorage
+from src.json_storage import JSONStorage
 
 
 class TestJSONStorage:
@@ -27,11 +25,11 @@ class TestJSONStorage:
         storage.add_aeroplane(sample_aeroplanes_data[0])
 
         # Проверяем, что данные сохранились
-        with open(temp_json_file, 'r', encoding='utf-8') as f:
+        with open(temp_json_file, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         assert len(data) == 1
-        assert data[0]['callsign'] == 'AFL101'
+        assert data[0]["callsign"] == "AFL101"
 
     def test_add_duplicate_aeroplane(self, temp_json_file, sample_aeroplanes_data):
         """Тест добавления дубликата."""
@@ -42,7 +40,7 @@ class TestJSONStorage:
         storage.add_aeroplane(sample_aeroplanes_data[0])
 
         # Проверяем, что дубликат не добавился
-        with open(temp_json_file, 'r', encoding='utf-8') as f:
+        with open(temp_json_file, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         assert len(data) == 1
@@ -52,7 +50,7 @@ class TestJSONStorage:
         storage = JSONStorage(temp_json_file)
         storage.add_aeroplanes_list(sample_aeroplanes_data)
 
-        with open(temp_json_file, 'r', encoding='utf-8') as f:
+        with open(temp_json_file, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         assert len(data) == 4
@@ -70,25 +68,25 @@ class TestJSONStorage:
         storage = JSONStorage(temp_json_file)
         storage.add_aeroplanes_list(sample_aeroplanes_data)
 
-        russian = storage.get_aeroplanes({'origin_country': 'Russia'})
+        russian = storage.get_aeroplanes({"origin_country": "Russia"})
         assert len(russian) == 1
-        assert russian[0]['callsign'] == 'AFL101'
+        assert russian[0]["callsign"] == "AFL101"
 
     def test_get_aeroplanes_by_origin_country(self, temp_json_file, sample_aeroplanes_data):
         """Тест получения самолетов по стране регистрации."""
         storage = JSONStorage(temp_json_file)
         storage.add_aeroplanes_list(sample_aeroplanes_data)
 
-        uk_aeroplanes = storage.get_aeroplanes_by_origin_country('United Kingdom')
+        uk_aeroplanes = storage.get_aeroplanes_by_origin_country("United Kingdom")
         assert len(uk_aeroplanes) == 1
-        assert uk_aeroplanes[0]['callsign'] == 'BAW202'
+        assert uk_aeroplanes[0]["callsign"] == "BAW202"
 
     def test_delete_aeroplanes(self, temp_json_file, sample_aeroplanes_data):
         """Тест удаления самолетов."""
         storage = JSONStorage(temp_json_file)
         storage.add_aeroplanes_list(sample_aeroplanes_data)
 
-        deleted = storage.delete_aeroplanes({'origin_country': 'Russia'})
+        deleted = storage.delete_aeroplanes({"origin_country": "Russia"})
         assert deleted == 1
 
         remaining = storage.get_aeroplanes()
