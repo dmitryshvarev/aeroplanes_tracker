@@ -1,6 +1,8 @@
 """Тесты для классов хранилищ."""
 
 import json
+import os
+import tempfile
 
 from src.json_storage import JSONStorage
 from src.csv_storage import CSVStorage
