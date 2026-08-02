@@ -19,7 +19,7 @@ class CSVStorage(AbstractStorage):
 
     __slots__ = ("_filename", "_fieldnames")
 
-    def __init__(self, filename: str = "../data/aeroplanes_data.csv") -> None:
+    def __init__(self, filename: str = "data/aeroplanes_data.csv") -> None:
         """
         Инициализация хранилища.
 

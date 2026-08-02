@@ -19,7 +19,7 @@ class JSONStorage(AbstractStorage):
 
     __slots__ = ("_filename", "_data")
 
-    def __init__(self, filename: str = "../data/aeroplanes_data.json") -> None:
+    def __init__(self, filename: str = "data/aeroplanes_data.json") -> None:
         """
         Инициализация хранилища.
 
@@ -29,6 +29,9 @@ class JSONStorage(AbstractStorage):
         self._filename: str = filename
         self._data: List[Dict[str, Any]] = []
         self._load_data()
+
+    def __str__(self):
+        return self._filename
 
     def _load_data(self) -> None:
         """Загружает данные из JSON-файла в кэш."""
